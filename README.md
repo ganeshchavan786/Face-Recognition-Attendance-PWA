@@ -106,12 +106,35 @@ Face-Recognition-Attendance-PWA/
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### 🎯 Option 1: One-Command Production Deployment (Recommended)
+
+Deploy in **5 minutes** with automated setup:
+
+```bash
+# Method A: Direct download & run
+curl -fsSL https://raw.githubusercontent.com/ganeshchavan786/Face-Recognition-Attendance-PWA/main/easy-install.sh | bash -s -- attendance_prod yourdomain.com admin@yourdomain.com
+
+# Method B: Download & execute
+wget https://raw.githubusercontent.com/ganeshchavan786/Face-Recognition-Attendance-PWA/main/easy-install.sh
+chmod +x easy-install.sh
+./easy-install.sh attendance_prod yourdomain.com admin@yourdomain.com
+```
+
+**✅ Features:**
+- Auto Docker installation
+- Secure key generation
+- Production-ready setup
+- SSL ready
+- Health checks included
+
+### 🛠️ Option 2: Manual Development Setup
+
+#### Prerequisites
 - Node.js 18+
 - Python 3.10+
 - Modern Browser (Chrome/Edge)
 
-### Backend Setup
+#### Backend Setup
 ```bash
 cd backend
 python -m venv venv
@@ -120,23 +143,70 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### PWA Setup
+#### PWA Setup
 ```bash
 cd pwa-app
 npm install
 npm run dev
 ```
 
-### Admin Panel Setup
+#### Admin Panel Setup
 ```bash
 cd admin-panel
 npm install
 npm run dev
 ```
 
+### 🐳 Option 3: Docker Development
+
+```bash
+# Clone and run
+git clone https://github.com/ganeshchavan786/Face-Recognition-Attendance-PWA.git
+cd Face-Recognition-Attendance-PWA
+docker-compose up -d
+
+# Access URLs:
+# PWA: http://localhost:80
+# Admin: http://localhost:3000
+# API: http://localhost:8000/docs
+```
+
 ---
 
-## 📱 PWA Installation
+## 🌐 Production Deployment
+
+### 🎯 Easy Production Setup
+
+```bash
+# One-command production deployment
+curl -fsSL https://raw.githubusercontent.com/ganeshchavan786/Face-Recognition-Attendance-PWA/main/easy-install.sh | bash -s -- production yourdomain.com admin@yourdomain.com
+```
+
+### 📋 Production URLs
+
+| Service | URL | Description |
+|---------|-----|-------------|
+| 📱 PWA App | `https://yourdomain.com` | Employee attendance app |
+| ⚙️ Admin Panel | `https://yourdomain.com:3000` | Management dashboard |
+| 📚 API Docs | `https://yourdomain.com:8000/docs` | API documentation |
+
+### 🔧 VPS Deployment
+
+```bash
+# On any Ubuntu/Debian VPS
+git clone https://github.com/ganeshchavan786/Face-Recognition-Attendance-PWA.git
+cd Face-Recognition-Attendance-PWA
+./easy-install.sh attendance_prod yourdomain.com admin@yourdomain.com
+```
+
+### 🐳 Docker Images
+
+Pre-built Docker images available:
+- `ganeshchavan963/face-attendance-backend:latest`
+- `ganeshchavan963/face-attendance-pwa:latest`
+- `ganeshchavan963/face-attendance-admin:latest`
+
+### 📱 PWA Installation
 
 1. Open PWA URL in Chrome/Edge
 2. Click "Install" prompt or menu → "Install App"
