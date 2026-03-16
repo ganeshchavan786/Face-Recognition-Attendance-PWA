@@ -1,0 +1,11 @@
+# Minimal requirements for local testing
+fastapi
+uvicorn
+python-multipart
+sqlalchemy
+aiosqlite
+python-jose
+bcrypt
+pydantic
+python-dotenv
+httpx

@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: face_attendance_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-attendance}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-attendance123}
+      POSTGRES_DB: ${DB_NAME:-face_attendance}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-attendance}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build: ./backend
+    container_name: face_attendance_backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${DB_USER:-attendance}:${DB_PASSWORD:-attendance123}@db:5432/${DB_NAME:-face_attendance}
+      SECRET_KEY: ${SECRET_KEY}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost,http://localhost:3000}
+      DEBUG: ${DEBUG:-False}
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PWA Frontend
+  pwa:
+    build: ./pwa-app
+    container_name: face_attendance_pwa
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+  # Admin Panel
+  admin:
+    build: ./admin-panel
+    container_name: face_attendance_admin
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  postgres_data:
