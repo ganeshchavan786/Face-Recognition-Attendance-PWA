@@ -20,5 +20,5 @@ email-validator==2.0.0
 cryptography==41.0.4
 
 # Utilities
-python-dotenv==1.0.0
+python-dotenv==1.2.2
 httpx==0.24.0
