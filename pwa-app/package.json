@@ -14,7 +14,7 @@
     "react-router-dom": "^6.20.0",
     "face-api.js": "^0.22.2",
     "idb": "^7.1.1",
-    "axios": "^1.6.0",
+    "axios": "^1.15.0",
     "date-fns": "^2.30.0",
     "uuid": "^9.0.0",
     "compressorjs": "^1.2.1",
